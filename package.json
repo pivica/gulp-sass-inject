@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "Gulp extension to inject sass variables into the pipeline.",
   "main": "index.js",
-  "author": {
-    "email": "ivicapuljic@gmail.com",
-    "name": "Ivica Puljic",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pivica/gulp-sass-inject.git"
   },
   "dependencies": {
     "gulp-util": "^3.0.7",
@@ -19,9 +22,10 @@
     "inject",
     "variables"
   ],
-  "license": "GPL-2.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/pivica/gulp-sass-inject.git"
-  }
+  "author": {
+    "email": "ivicapuljic@gmail.com",
+    "name": "Ivica Puljic"
+  },
+  "license": "GPL-2.0"
 }
+
