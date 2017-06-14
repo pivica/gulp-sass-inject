@@ -31,7 +31,7 @@ var isObjEmpty = function (obj) {
 module.exports = function (options) {
   const sassVars = [];
   var prepend;
-  var filesCount = options.files.length;
+  //var filesCount = options.files.length;
 
   // Construct sass vars string for injection.
   if (!isObjEmpty(options.variables)) {
