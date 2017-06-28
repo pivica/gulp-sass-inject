@@ -1,7 +1,11 @@
 'use strict';
 
 /**
- * Most of this code is taken from https://github.com/giowe/gulp-sass-vars.
+ * @file
+ * Gulp SASS inject module.
+ *
+ * Inspiration and basic parts of this code are taken from
+ * https://github.com/giowe/gulp-sass-vars.
  */
 
 const Stream = require('readable-stream');
@@ -28,6 +32,47 @@ var isObjEmpty = function (obj) {
   return typeof obj !== 'object' || obj === null || !Object.keys(obj).length;
 };
 
+/**
+ * Transform object to SASS map string representation.
+ *
+ * @param object mapObject
+ * @return {string}
+ */
+var transformToSASSMap = function(mapObject) {
+  var map = ['('];
+
+  Object.keys(mapObject).map((key) => {
+    // @todo - add indentitation with depth info.
+    var element = key + ": ";
+    if (typeof mapObject[key] == 'object') {
+      element += transformToSASSMap(mapObject[key]);
+    }
+    else {
+      element += mapObject[key];
+    }
+    element += ",";
+
+    map.push(element);
+  });
+
+  map.push(')');
+  return map.join('\n');
+}
+
+/**
+ * Create SASS variable from name and passed value.
+ *
+ * @param name
+ * @param value
+ * @return {string}
+ */
+var transformToSASS = function (name, value) {
+  if (typeof value === 'object') {
+    value = transformToSASSMap(value);
+  }
+  return '$' + name + ': ' + value + ';'
+};
+
 module.exports = function (options) {
   const sassVars = [];
   var prepend;
@@ -36,7 +81,8 @@ module.exports = function (options) {
   // Construct sass vars string for injection.
   if (!isObjEmpty(options.variables)) {
     Object.keys(options.variables).map((key) => {
-      sassVars.push('$' + key + ': ' + options.variables[key] + ';');
+      var sassVar = transformToSASS(key, options.variables[key]);
+      sassVars.push(sassVar);
     });
     prepend = sassVars.join('\n');
   }
