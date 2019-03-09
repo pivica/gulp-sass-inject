@@ -10,7 +10,6 @@
 
 const Stream = require('readable-stream');
 const StreamQueue = require('streamqueue');
-const gutil = require('gulp-util');
 
 function getStreamFromBuffer(string) {
   const stream = new Stream.Readable();
