@@ -11,8 +11,7 @@
     "url": "https://github.com/pivica/gulp-sass-inject.git"
   },
   "dependencies": {
-    "gulp-util": "^3.0.7",
-    "readable-stream": "^2.1.5",
+    "readable-stream": "^3.2.0",
     "streamqueue": "0.0.6"
   },
   "keywords": [
